@@ -29,7 +29,7 @@ public class Ghe {
 
     public void setRap(Rap rap) {
         if (rap == null)
-            throw new IllegalArgumentException("Rạp không được null!");
+            throw new IllegalArgumentException("Rạp không được trống!");
         this.rap = rap;
     }
 

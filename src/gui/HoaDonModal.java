@@ -84,7 +84,7 @@ public class HoaDonModal extends JFrame {
         JLabel lblSoDienThoai = new JLabel("   Số liên hệ:               " + hoaDon.getNhanVien().getSoDienThoai());
         JLabel lblDiaChiRap = new JLabel("   Địa chỉ rạp chiếu:  " +
                 "12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP. Hồ Chí Minh");
-        JLabel lblEmail = new JLabel("   Email:                       " + "3TCinema@gmail.com");
+        JLabel lblEmail = new JLabel("   Email:                       " + "HSKCinema@gmail.com");
 
         JLabel lblTenKhachHang = new JLabel("   Khách hàng:        " + hoaDon.getKhachHang().getHoTen());
         JLabel lblDiaChiKH = new JLabel("   Địa chỉ:                 " + hoaDon.getKhachHang().getDiaChi());
@@ -254,7 +254,7 @@ public class HoaDonModal extends JFrame {
             doc.add(new Paragraph("Số liên hệ: " + this.hoaDon.getNhanVien().getSoDienThoai(), fontNormal));
             doc.add(new Paragraph("Địa chỉ rạp chiếu: 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP. Hồ Chí Minh",
                     fontNormal));
-            doc.add(new Paragraph("Email: 3TCinema@gmail.com", fontNormal));
+            doc.add(new Paragraph("Email: HSKCinema@gmail.com", fontNormal));
             doc.add(new Paragraph(" ", fontNormal));
 
             doc.add(new Paragraph("Khách hàng: " + this.hoaDon.getKhachHang().getHoTen(), fontNormal));

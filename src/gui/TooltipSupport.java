@@ -47,10 +47,10 @@ public final class TooltipSupport {
 
     private static String buildTooltip(JComponent component) {
         if (component instanceof JTable) {
-            return "Danh sách dữ liệu. Chọn một dòng để xem chi tiết.";
+            return "Danh sách dữ liệu. Chọn một dòng để xem hoặc thao tác.";
         }
         if (component instanceof JTree) {
-            return "Chọn mục để lọc dữ liệu hiển thị.";
+            return "Chọn mục để lọc dữ liệu.";
         }
         if (component instanceof JComboBox<?>) {
             return "Chọn một giá trị từ danh sách.";
@@ -64,7 +64,7 @@ public final class TooltipSupport {
         if (component instanceof JTextArea || component instanceof JTextField) {
             JTextField textField = component instanceof JTextField ? (JTextField) component : null;
             if (textField != null && !textField.isEditable()) {
-                return "Thông tin chỉ dùng để xem.";
+                return "Trường chỉ đọc.";
             }
             return "Nhập thông tin tại đây.";
         }
@@ -72,7 +72,7 @@ public final class TooltipSupport {
             return "Chọn một mục từ danh sách.";
         }
         if (component instanceof JScrollPane) {
-            return "Cuộn để xem toàn bộ nội dung.";
+            return "Cuộn để xem thêm nội dung.";
         }
         if (component instanceof AbstractButton) {
             AbstractButton button = (AbstractButton) component;
@@ -80,9 +80,27 @@ public final class TooltipSupport {
             if (isBlank(action)) {
                 return "Nhấn để thực hiện thao tác.";
             }
+            if (isNavAction(action)) {
+                return "Nhấn để xem " + action + ".";
+            }
+            if ("đăng xuất".equals(action)) {
+                return "Nhấn để đăng xuất.";
+            }
             return "Nhấn để " + action + ".";
         }
         return null;
+    }
+
+    private static boolean isNavAction(String action) {
+        return "trang chủ".equals(action)
+            || "bán vé".equals(action)
+            || "phim".equals(action)
+            || "suất chiếu".equals(action)
+            || "khách hàng".equals(action)
+            || "nhân viên".equals(action)
+            || "thống kê".equals(action)
+            || "hóa đơn".equals(action)
+            || "vé phim".equals(action);
     }
 
     private static String normalizeAction(String rawText) {

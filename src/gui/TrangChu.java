@@ -10,7 +10,7 @@ public class TrangChu extends JPanel {
         setLayout(new BorderLayout());
         setBackground(Color.WHITE);
 
-        ImageIcon bgIcon = new ImageIcon("icon/backGround.jpg");
+        ImageIcon bgIcon = new ImageIcon("icon/bg.jpg");
         Image bgImg = bgIcon.getImage().getScaledInstance(1100, 750, Image.SCALE_SMOOTH);
         JLabel lblBg = new JLabel(new ImageIcon(bgImg));
         lblBg.setHorizontalAlignment(JLabel.CENTER);
@@ -20,7 +20,7 @@ public class TrangChu extends JPanel {
         boxInfo.setBackground(new Color(245, 245, 245));
         boxInfo.setOpaque(true);
 
-        JLabel lblTitle = new JLabel("HỆ THỐNG QUẢN LÝ RẠP CHIẾU PHIM 3T CINEMA");
+        JLabel lblTitle = new JLabel("HỆ THỐNG QUẢN LÝ RẠP CHIẾU PHIM HSK CINEMA");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
         lblTitle.setForeground(new Color(200, 0, 0));
         lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -50,14 +50,14 @@ public class TrangChu extends JPanel {
 
         boxInfo.add(Box.createVerticalStrut(20));
 
-        JLabel lblContact = new JLabel("Liên hệ: 0000 000 000 | Email: 3TCinema@gmail.com");
+        JLabel lblContact = new JLabel("Liên hệ: 0000 000 000 | Email: HSKCinema@gmail.com");
         lblContact.setFont(new Font("Arial", Font.PLAIN, 15));
         lblContact.setAlignmentX(Component.CENTER_ALIGNMENT);
         boxInfo.add(lblContact);
 
         boxInfo.add(Box.createVerticalStrut(30));
 
-        JLabel lblQuote = new JLabel("\"Phim hay, cảm xúc thật — chỉ có tại 3T Cinema!\"");
+        JLabel lblQuote = new JLabel("\"Phim hay, cảm xúc thật — chỉ có tại HSK Cinema!\"");
         lblQuote.setFont(new Font("Arial", Font.ITALIC, 18));
         lblQuote.setForeground(new Color(128, 0, 128));
         lblQuote.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -70,7 +70,7 @@ public class TrangChu extends JPanel {
     }
 
     public static void main(String[] args) {
-        JFrame f = new JFrame("Trang chủ - 3T Cinema");
+        JFrame f = new JFrame("Trang chủ - HSK Cinema");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setSize(1250, 750);
         f.add(new TrangChu());
