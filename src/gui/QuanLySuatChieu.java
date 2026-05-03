@@ -47,18 +47,14 @@ public class QuanLySuatChieu extends JPanel implements ActionListener, LoadData 
 
     public QuanLySuatChieu() {
         // ===== Cấu hình =====
-        setBackground(Color.WHITE);
+        setBackground(ModernUI.getBackgroundColor());
         setLayout(new BorderLayout());
 
         // ===== Khởi tạo DAO =====
         quanLySuatChieu_DAO = new QuanLySuatChieu_DAO();
 
         // ===== Tiêu đề =====
-        JLabel lblTitle = new JLabel("QUẢN LÝ SUẤT CHIẾU", SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 26));
-        lblTitle.setForeground(new Color(220, 20, 60));
-        lblTitle.setBorder(BorderFactory.createEmptyBorder(15, 0, 15, 0));
-        add(lblTitle, BorderLayout.NORTH);
+        add(ModernUI.createHeader("QUẢN LÝ SUẤT CHIẾU"), BorderLayout.NORTH);
 
         // ===== Panel trái: Cây tháng =====
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Danh sách Tháng chiếu");
@@ -76,14 +72,14 @@ public class QuanLySuatChieu extends JPanel implements ActionListener, LoadData 
 
         // ===== Panel trung tâm =====
         JPanel pnBody = new JPanel(new BorderLayout());
-        pnBody.setBackground(Color.WHITE);
-        pnBody.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        pnBody.setBackground(ModernUI.getSurfaceColor());
+        pnBody.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(pnBody, BorderLayout.CENTER);
 
         // ===== Form nhập liệu =====
         JPanel pnForm = new JPanel(new GridLayout(4, 4, 10, 10));
         pnForm.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-        pnForm.setBackground(Color.WHITE);
+        pnForm.setBackground(ModernUI.getSurfaceColor());
 
         pnForm.add(new JLabel("Mã Suất Chiếu:"));
         txtMaSuat = new JTextField();
@@ -140,7 +136,7 @@ public class QuanLySuatChieu extends JPanel implements ActionListener, LoadData 
 
         // ===== Panel dưới: nút chức năng =====
         JPanel pnSouth = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
-        pnSouth.setBackground(Color.WHITE);
+        pnSouth.setBackground(ModernUI.getSurfaceColor());
 
         JLabel lblTim = new JLabel("Tìm mã suất:");
         lblTim.setFont(new Font("Segoe UI", Font.BOLD, 18));

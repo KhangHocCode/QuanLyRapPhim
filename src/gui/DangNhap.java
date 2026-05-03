@@ -30,18 +30,21 @@ public class DangNhap extends JFrame implements ActionListener {
 
         JPanel pnlTieuDe = new JPanel();
         lblTieuDe = new JLabel("ĐĂNG NHẬP HỆ THỐNG");
-        lblTieuDe.setFont(new Font("Arial", Font.BOLD, 32));
-        lblTieuDe.setForeground(Color.WHITE);
-        pnlTieuDe.setBackground(Color.RED);
+        lblTieuDe.setFont(new Font("Roboto", Font.BOLD, 28));
+        lblTieuDe.setForeground(new Color(245, 197, 66));
+        pnlTieuDe.setBackground(new Color(12, 12, 12));
         pnlTieuDe.add(lblTieuDe);
 
         Box boxTong = Box.createVerticalBox();
         Box bTaiKhoan, bMatKhau, bCheck, bNut;
+        boxTong.setBackground(new Color(12, 12, 12));
+        boxTong.setOpaque(true);
 
         boxTong.add(Box.createVerticalStrut(40));
         boxTong.add(bTaiKhoan = Box.createHorizontalBox());
         bTaiKhoan.add(lblTaiKhoan = new JLabel("Tài khoản:"));
-        lblTaiKhoan.setFont(new Font("Tahoma", Font.BOLD, 15));
+        lblTaiKhoan.setFont(new Font("Roboto", Font.BOLD, 14));
+        lblTaiKhoan.setForeground(Color.WHITE);
         bTaiKhoan.add(Box.createHorizontalStrut(10));
         bTaiKhoan.add(txtTaiKhoan = new JTextField(20));
         txtTaiKhoan.setMaximumSize(new Dimension(300, 30));
@@ -49,7 +52,8 @@ public class DangNhap extends JFrame implements ActionListener {
         boxTong.add(Box.createVerticalStrut(15));
         boxTong.add(bMatKhau = Box.createHorizontalBox());
         bMatKhau.add(lblMatKhau = new JLabel("Mật khẩu:"));
-        lblMatKhau.setFont(new Font("Tahoma", Font.BOLD, 15));
+        lblMatKhau.setFont(new Font("Roboto", Font.BOLD, 14));
+        lblMatKhau.setForeground(Color.WHITE);
         bMatKhau.add(Box.createHorizontalStrut(10));
         bMatKhau.add(txtMatKhau = new JPasswordField(20));
         txtMatKhau.setMaximumSize(new Dimension(300, 30));
@@ -57,6 +61,8 @@ public class DangNhap extends JFrame implements ActionListener {
         boxTong.add(Box.createVerticalStrut(15));
         boxTong.add(bCheck = Box.createHorizontalBox());
         chkHienMatKhau = new JCheckBox("Hiển thị mật khẩu");
+        chkHienMatKhau.setForeground(Color.WHITE);
+        chkHienMatKhau.setBackground(new Color(12, 12, 12));
         bCheck.add(chkHienMatKhau);
 
         boxTong.add(Box.createVerticalStrut(20));

@@ -50,14 +50,16 @@ public class BaoCaoUI extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
+        getContentPane().setBackground(ModernUI.getBackgroundColor());
         JPanel pNorth = new JPanel(new BorderLayout());
+        pNorth.setBackground(ModernUI.getSurfaceColor());
         JLabel lblTieuDe = new JLabel("BÁO CÁO", SwingConstants.CENTER);
-        lblTieuDe.setForeground(new Color(220, 20, 60));
-
+        lblTieuDe.setForeground(ModernUI.getAccentColor());
         lblTieuDe.setFont(lblTieuDe.getFont().deriveFont(24.0f));
         pNorth.add(lblTieuDe, BorderLayout.NORTH);
         tinhTongThongKe(thang);
         JPanel pNoidung = new JPanel(new GridLayout(4, 1));
+        pNoidung.setBackground(ModernUI.getSurfaceColor());
         JLabel lblNgayBaoCao = new JLabel(
                 "Ngày Báo cáo    : " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         lblNgayBaoCao.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,6 +89,7 @@ public class BaoCaoUI extends JFrame {
         add(pNorth, BorderLayout.NORTH);
 
         JPanel pCenter = new JPanel(new BorderLayout());
+        pCenter.setBackground(ModernUI.getSurfaceColor());
         JTable table = new JTable();
         model = new DefaultTableModel();
         model.setColumnIdentifiers(new Object[] { "Mã phim", "Tên Phim", "Số Lượng Vé", "Doanh Thu" });
@@ -97,6 +100,7 @@ public class BaoCaoUI extends JFrame {
         add(pCenter, BorderLayout.CENTER);
 
         JPanel pSouth = new JPanel();
+        pSouth.setBackground(ModernUI.getSurfaceColor());
         JButton btnDong = new JButton("Đóng");
         JButton inBaoCao = new JButton("In Báo Cáo");
         btnDong.addActionListener(e -> close());

@@ -43,7 +43,9 @@ public class QuanLyVe extends JPanel implements LoadData, ResetForm {
 
     public QuanLyVe() {
         setLayout(new BorderLayout(10, 10));
-        setBackground(Color.WHITE);
+        setBackground(ModernUI.getBackgroundColor());
+
+        add(ModernUI.createHeader("QUẢN LÝ VÉ PHIM"), BorderLayout.NORTH);
 
         // ======= KẾT NỐI DATABASE =======
         try {
@@ -65,7 +67,7 @@ public class QuanLyVe extends JPanel implements LoadData, ResetForm {
                 TitledBorder.LEFT, TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 20),
                 Color.DARK_GRAY));
-        pnNorth.setBackground(Color.WHITE);
+        pnNorth.setBackground(ModernUI.getSurfaceColor());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 10, 8, 10);
@@ -118,7 +120,8 @@ public class QuanLyVe extends JPanel implements LoadData, ResetForm {
         pnNorth.add(new JLabel(""), gbc);
 
         setFormEditable(false);
-        add(pnNorth, BorderLayout.NORTH);
+        JPanel contentCard = ModernUI.createContentCard(new BorderLayout(10, 10));
+        contentCard.add(pnNorth, BorderLayout.NORTH);
 
         model = new DefaultTableModel(new String[] {
                 "STT", "Mã vé", "Mã ghế", "Ngày bán", "Mã suất chiếu", "Trạng thái"
@@ -136,10 +139,10 @@ public class QuanLyVe extends JPanel implements LoadData, ResetForm {
                 TitledBorder.LEFT, TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 18),
                 Color.DARK_GRAY));
-        add(scroll, BorderLayout.CENTER);
+        contentCard.add(scroll, BorderLayout.CENTER);
 
         JPanel pnSouth = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
-        pnSouth.setBackground(Color.WHITE);
+        pnSouth.setBackground(ModernUI.getSurfaceColor());
 
         JLabel lblTim = new JLabel("Xem vé phim:");
         lblTim.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -175,7 +178,8 @@ public class QuanLyVe extends JPanel implements LoadData, ResetForm {
         pnSouth.add(btnXoaRong);
         pnSouth.add(btnLuu);
 
-        add(pnSouth, BorderLayout.SOUTH);
+        contentCard.add(pnSouth, BorderLayout.SOUTH);
+        add(contentCard, BorderLayout.CENTER);
 
         // ===== SỰ KIỆN =====
         loadData();

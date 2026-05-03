@@ -27,6 +27,7 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
     private JLabel lblTieuDe;
     private JPanel pnInput, pnActions;
     private JScrollPane scroll;
+    private JPanel body;
 
     private QuanLyPhim_DAO phimDAO;
     private ArrayList<Phim> dsPhim;
@@ -36,10 +37,14 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
     private final Border BORDER_BTN = BorderFactory.createLineBorder(new Color(0, 123, 255), 1);
 
     public QuanLyPhim() {
-        setLayout(null);
-        
-        Color bgColor = new Color(235, 245, 255);
-        setBackground(bgColor);
+        setLayout(new BorderLayout());
+
+        setBackground(ModernUI.getBackgroundColor());
+        add(ModernUI.createHeader("QUẢN LÝ PHIM"), BorderLayout.NORTH);
+
+        body = new JPanel(null);
+        body.setBackground(ModernUI.getSurfaceColor());
+        add(body, BorderLayout.CENTER);
 
         try {
             ConnectDB.getInstance().connect();
@@ -52,13 +57,14 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
         lblTieuDe = new JLabel("Quản lý phim");
         lblTieuDe.setFont(new Font("Segoe UI", Font.BOLD, 24));
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
-        add(lblTieuDe);
+        lblTieuDe.setVisible(false);
+        body.add(lblTieuDe);
         
         pnInput = new JPanel();
         pnInput.setLayout(null);
-        pnInput.setBackground(Color.WHITE);
+        pnInput.setBackground(ModernUI.getSurfaceColor());
         pnInput.setBorder(BorderFactory.createTitledBorder("Thông tin phim"));
-        add(pnInput);
+        body.add(pnInput);
 
         JLabel lblMaPhim = new JLabel("Mã phim:");
         lblMaPhim.setBounds(40, 40, 120, 30);
@@ -123,8 +129,8 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
 
         pnActions = new JPanel();
         pnActions.setLayout(null);
-        pnActions.setBackground(Color.WHITE);
-        add(pnActions);
+        pnActions.setBackground(ModernUI.getSurfaceColor());
+        body.add(pnActions);
 
         JLabel lblTim = new JLabel("Nhập mã phim cần tìm:");
         lblTim.setFont(FONT_LBL);
@@ -188,7 +194,7 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); 
 
         scroll = new JScrollPane(table);
-        add(scroll);
+        body.add(scroll);
 
         btnThem.addActionListener(this);
         btnSua.addActionListener(this);
@@ -217,8 +223,8 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
     }
 
     private void updateResponsiveLayout() {
-        int width = Math.max(getWidth(), 1180);
-        int height = Math.max(getHeight(), 700);
+        int width = Math.max(body.getWidth(), 1180);
+        int height = Math.max(body.getHeight(), 700);
 
         int margin = 30;
         int top = 15;

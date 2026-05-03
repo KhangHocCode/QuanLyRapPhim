@@ -8,7 +8,7 @@ public class TrangChu extends JPanel {
 
     public TrangChu() {
         setLayout(new BorderLayout());
-        setBackground(Color.WHITE);
+        setBackground(new Color(12, 12, 12));
 
         ImageIcon bgIcon = new ImageIcon("icon/bg.jpg");
         Image bgImg = bgIcon.getImage().getScaledInstance(1100, 750, Image.SCALE_SMOOTH);
@@ -17,20 +17,20 @@ public class TrangChu extends JPanel {
 
         Box boxInfo = Box.createVerticalBox();
         boxInfo.setBorder(new EmptyBorder(40, 30, 40, 30));
-        boxInfo.setBackground(new Color(245, 245, 245));
+        boxInfo.setBackground(new Color(12, 12, 12, 220));
         boxInfo.setOpaque(true);
 
         JLabel lblTitle = new JLabel("HỆ THỐNG QUẢN LÝ RẠP CHIẾU PHIM HSK CINEMA");
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
-        lblTitle.setForeground(new Color(200, 0, 0));
+        lblTitle.setFont(new Font("Roboto", Font.BOLD, 22));
+        lblTitle.setForeground(new Color(245, 197, 66));
         lblTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         boxInfo.add(lblTitle);
         boxInfo.add(Box.createVerticalStrut(40));
 
         JLabel lblSub = new JLabel("Trải nghiệm điện ảnh đỉnh cao cùng công nghệ 3D, IMAX");
-        lblSub.setFont(new Font("Arial", Font.ITALIC, 18));
-        lblSub.setForeground(Color.DARK_GRAY);
+        lblSub.setFont(new Font("Roboto", Font.ITALIC, 16));
+        lblSub.setForeground(Color.WHITE);
         lblSub.setAlignmentX(Component.CENTER_ALIGNMENT);
         boxInfo.add(lblSub);
         boxInfo.add(Box.createVerticalStrut(40));
@@ -43,23 +43,24 @@ public class TrangChu extends JPanel {
         boxInfo.add(Box.createVerticalStrut(15));
 
         JLabel lblName = new JLabel("QUẢN LÝ RẠP: NGUYỄN HỮU KHANG");
-        lblName.setFont(new Font("Arial", Font.BOLD, 18));
-        lblName.setForeground(new Color(0, 0, 128));
+        lblName.setFont(new Font("Roboto", Font.BOLD, 16));
+        lblName.setForeground(Color.WHITE);
         lblName.setAlignmentX(Component.CENTER_ALIGNMENT);
         boxInfo.add(lblName);
 
         boxInfo.add(Box.createVerticalStrut(20));
 
         JLabel lblContact = new JLabel("Liên hệ: 0000 000 000 | Email: HSKCinema@gmail.com");
-        lblContact.setFont(new Font("Arial", Font.PLAIN, 15));
+        lblContact.setFont(new Font("Roboto", Font.PLAIN, 14));
+        lblContact.setForeground(Color.WHITE);
         lblContact.setAlignmentX(Component.CENTER_ALIGNMENT);
         boxInfo.add(lblContact);
 
         boxInfo.add(Box.createVerticalStrut(30));
 
         JLabel lblQuote = new JLabel("\"Phim hay, cảm xúc thật — chỉ có tại HSK Cinema!\"");
-        lblQuote.setFont(new Font("Arial", Font.ITALIC, 18));
-        lblQuote.setForeground(new Color(128, 0, 128));
+        lblQuote.setFont(new Font("Roboto", Font.ITALIC, 16));
+        lblQuote.setForeground(new Color(245, 197, 66));
         lblQuote.setAlignmentX(Component.CENTER_ALIGNMENT);
         boxInfo.add(lblQuote);
 

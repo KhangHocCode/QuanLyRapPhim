@@ -23,6 +23,7 @@ public class QuanLyKhachHang extends JPanel implements ActionListener, MouseList
     private JLabel lblTieuDe;
     private JPanel pnInput, pnActions;
     private JScrollPane scroll;
+    private JPanel body;
 
     private final Font FONT_LBL = new Font("Segoe UI", Font.BOLD, 16);
     private final Font FONT_TXT = new Font("Segoe UI", Font.PLAIN, 16);
@@ -35,23 +36,28 @@ public class QuanLyKhachHang extends JPanel implements ActionListener, MouseList
     }
 
     public QuanLyKhachHang() {
-        setLayout(null); 
-        
-        Color bgColor = new Color(235, 245, 255);
-        setBackground(bgColor);
+        setLayout(new BorderLayout());
+
+        setBackground(ModernUI.getBackgroundColor());
+        add(ModernUI.createHeader("QUẢN LÝ HỘI VIÊN"), BorderLayout.NORTH);
+
+        body = new JPanel(null);
+        body.setBackground(ModernUI.getSurfaceColor());
+        add(body, BorderLayout.CENTER);
 
         kh_dao = new QuanLyKhachHang_DAO();
 
         lblTieuDe = new JLabel("Quản lý hội viên");
         lblTieuDe.setFont(new Font("Segoe UI", Font.BOLD, 24));
         lblTieuDe.setHorizontalAlignment(SwingConstants.CENTER);
-        add(lblTieuDe);
+        lblTieuDe.setVisible(false);
+        body.add(lblTieuDe);
 
         pnInput = new JPanel();
         pnInput.setLayout(null);
-        pnInput.setBackground(Color.WHITE);
+        pnInput.setBackground(ModernUI.getSurfaceColor());
         pnInput.setBorder(BorderFactory.createTitledBorder("Thông tin hội viên"));
-        add(pnInput);
+        body.add(pnInput);
 
         JLabel lblMaKH = new JLabel("Mã khách hàng:");
         lblMaKH.setBounds(40, 40, 120, 30);
@@ -106,8 +112,8 @@ public class QuanLyKhachHang extends JPanel implements ActionListener, MouseList
 
         pnActions = new JPanel();
         pnActions.setLayout(null);
-        pnActions.setBackground(Color.WHITE);
-        add(pnActions);
+        pnActions.setBackground(ModernUI.getSurfaceColor());
+        body.add(pnActions);
 
         JLabel lblTim = new JLabel("Nhập mã KH cần tìm:");
         lblTim.setFont(FONT_LBL);
@@ -168,7 +174,7 @@ public class QuanLyKhachHang extends JPanel implements ActionListener, MouseList
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         scroll = new JScrollPane(table);
-        add(scroll);
+        body.add(scroll);
 
         table.addMouseListener(this);
         btnThem.addActionListener(this);
@@ -193,8 +199,8 @@ public class QuanLyKhachHang extends JPanel implements ActionListener, MouseList
     }
 
     private void updateResponsiveLayout() {
-        int width = Math.max(getWidth(), 1180);
-        int height = Math.max(getHeight(), 700);
+        int width = Math.max(body.getWidth(), 1180);
+        int height = Math.max(body.getHeight(), 700);
 
         int margin = 30;
         int top = 15;

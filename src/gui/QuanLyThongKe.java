@@ -44,14 +44,10 @@ public class QuanLyThongKe extends JPanel implements ActionListener, LoadData {
         quanLyHoaDon_DAO = new QuanLyHoaDon_DAO();
 
         setLayout(new BorderLayout(10, 10));
-        setBackground(Color.WHITE);
+        setBackground(ModernUI.getBackgroundColor());
 
         // ===== NORTH =====
-        JLabel lblTitle = new JLabel("BÁO CÁO THỐNG KÊ", SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        lblTitle.setForeground(new Color(220, 20, 60));
-        lblTitle.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-        add(lblTitle, BorderLayout.NORTH);
+        add(ModernUI.createHeader("BÁO CÁO THỐNG KÊ"), BorderLayout.NORTH);
 
         // ===== WEST (JTree ngày chiếu) =====
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Danh sách Tháng chiếu");
@@ -69,19 +65,19 @@ public class QuanLyThongKe extends JPanel implements ActionListener, LoadData {
 
         // ===== CENTER =====
         JPanel pnCenter = new JPanel(new BorderLayout(10, 10));
-        pnCenter.setBackground(Color.WHITE);
+        pnCenter.setBackground(ModernUI.getSurfaceColor());
         add(pnCenter, BorderLayout.CENTER);
 
         // === Thống kê tổng quan ===
         JPanel pnThongKe = new JPanel(new GridLayout(1, 4, 12, 5));
-        pnThongKe.setBackground(Color.WHITE);
+        pnThongKe.setBackground(ModernUI.getSurfaceColor());
         pnThongKe.setBorder(BorderFactory.createTitledBorder("Thống kê tổng quan"));
 
         Font fTitle = new Font("Segoe UI", Font.BOLD, 15);
         Font fValue = new Font("Segoe UI", Font.BOLD, 20);
         // -- Tổng phim --
         JPanel pnTotalPhim = new JPanel(new BorderLayout());
-        pnTotalPhim.setBackground(Color.WHITE);
+        pnTotalPhim.setBackground(ModernUI.getSurfaceColor());
         JLabel lblTotalPhimTitle = new JLabel("Tổng số phim", SwingConstants.CENTER);
         lblTotalPhimTitle.setFont(fTitle);
         lblTotalPhimTitle.setForeground(Color.BLACK);
@@ -93,7 +89,7 @@ public class QuanLyThongKe extends JPanel implements ActionListener, LoadData {
         pnThongKe.add(pnTotalPhim);
         // -- Tổng vé --
         JPanel pnTotalVe = new JPanel(new BorderLayout());
-        pnTotalVe.setBackground(Color.WHITE);
+        pnTotalVe.setBackground(ModernUI.getSurfaceColor());
         JLabel lblTotalVeTitle = new JLabel("Tổng số vé đã bán", SwingConstants.CENTER);
         lblTotalVeTitle.setFont(fTitle);
         lblTotalVeTitle.setForeground(Color.BLACK);
@@ -105,7 +101,7 @@ public class QuanLyThongKe extends JPanel implements ActionListener, LoadData {
         pnThongKe.add(pnTotalVe);
         // -- Tổng doanh thu --
         JPanel pnTotalDoanhThu = new JPanel(new BorderLayout());
-        pnTotalDoanhThu.setBackground(Color.WHITE);
+        pnTotalDoanhThu.setBackground(ModernUI.getSurfaceColor());
         JLabel lblTotalDoanhThuTitle = new JLabel("Tổng doanh thu (vnđ)", SwingConstants.CENTER);
         lblTotalDoanhThuTitle.setFont(fTitle);
         lblTotalDoanhThuTitle.setForeground(Color.BLACK);
@@ -138,7 +134,7 @@ public class QuanLyThongKe extends JPanel implements ActionListener, LoadData {
 
         // ===== SOUTH (nút chức năng) =====
         JPanel pnSouth = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
-        pnSouth.setBackground(Color.WHITE);
+        pnSouth.setBackground(ModernUI.getSurfaceColor());
 
         JLabel lblTim = new JLabel("Tìm mã phim:");
         lblTim.setFont(new Font("Segoe UI", Font.BOLD, 18));

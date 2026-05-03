@@ -3,6 +3,7 @@ package gui;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import entity.LoadData;
 
@@ -23,37 +24,65 @@ public class Start extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // ==== PANEL MENU BÊN TRÁI ====
-        JPanel pnWest = new JPanel(new BorderLayout());
-        pnWest.setPreferredSize(new Dimension(220, 1000));
-        pnWest.setBackground(new Color(255, 56, 56));
-        pnWest.setBorder(BorderFactory.createLineBorder(Color.RED, 2));
+        Color colorBg = new Color(12, 12, 12);
+        Color colorSidebar = new Color(18, 18, 18);
+        Color colorSurface = new Color(24, 24, 24);
+        Color colorAccent = new Color(245, 197, 66);
+        Color colorAccentDark = new Color(214, 169, 52);
+        Color colorText = Color.WHITE;
 
-        Box boxMenu = Box.createVerticalBox();
-        pnWest.add(boxMenu);
-        boxMenu.add(Box.createVerticalStrut(25));
+        // ==== TOP BAR ====
+        JPanel pnTop = new JPanel(new BorderLayout());
+        pnTop.setBackground(colorBg);
+        pnTop.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, colorAccent));
 
-        // Logo
-        ImageIcon logoIcon = new ImageIcon("icon/logo.jpg");
-        Image logoImg = logoIcon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
-        JLabel lblLogo = new JLabel(new ImageIcon(logoImg));
-        lblLogo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        boxMenu.add(lblLogo);
-        boxMenu.add(Box.createVerticalStrut(15));
+        JLabel lblTitle = new JLabel("HSK CINEMA MANAGEMENT");
+        lblTitle.setFont(new Font("Roboto", Font.BOLD, 18));
+        lblTitle.setForeground(colorAccent);
+        lblTitle.setBorder(new EmptyBorder(10, 16, 10, 16));
+        pnTop.add(lblTitle, BorderLayout.WEST);
 
         String tenNV = (DangNhap.nhanVienDangNhap != null) ? DangNhap.nhanVienDangNhap.getTenNV() : "Khách";
         lblNhanVien = new JLabel("Xin chào, " + tenNV);
-        lblNhanVien.setFont(new Font("Arial", Font.BOLD, 18));
-        lblNhanVien.setForeground(Color.WHITE);
-        lblNhanVien.setAlignmentX(Component.CENTER_ALIGNMENT);
-        boxMenu.add(lblNhanVien);
-        boxMenu.add(Box.createVerticalStrut(15));
-        boxMenu.add(createSeparatorLine(3));
+        lblNhanVien.setFont(new Font("Roboto", Font.PLAIN, 14));
+        lblNhanVien.setForeground(colorText);
+        lblNhanVien.setBorder(new EmptyBorder(10, 16, 10, 16));
+        pnTop.add(lblNhanVien, BorderLayout.EAST);
 
-        Font fontButton = new Font("Arial", Font.BOLD, 18);
-        Color bgMenu = pnWest.getBackground();
-        Color hoverColor = new Color(41, 128, 185); 
-        Color selectedColor = new Color(0, 102, 153); 
+        // ==== PANEL MENU BÊN TRÁI ====
+        JPanel pnWest = new JPanel(new BorderLayout());
+        pnWest.setPreferredSize(new Dimension(240, 1000));
+        pnWest.setBackground(colorSidebar);
+        pnWest.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(40, 40, 40)));
+
+        JPanel pnLogo = new JPanel();
+        pnLogo.setBackground(colorSidebar);
+        pnLogo.setBorder(new EmptyBorder(16, 16, 16, 16));
+        pnLogo.setLayout(new BoxLayout(pnLogo, BoxLayout.Y_AXIS));
+
+        ImageIcon logoIcon = new ImageIcon("icon/logo.jpg");
+        Image logoImg = logoIcon.getImage().getScaledInstance(72, 72, Image.SCALE_SMOOTH);
+        JLabel lblLogo = new JLabel(new ImageIcon(logoImg));
+        lblLogo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnLogo.add(lblLogo);
+        pnLogo.add(Box.createVerticalStrut(8));
+
+        JLabel lblBrand = new JLabel("HSK Cinema");
+        lblBrand.setFont(new Font("Roboto", Font.BOLD, 16));
+        lblBrand.setForeground(colorText);
+        lblBrand.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pnLogo.add(lblBrand);
+
+        pnWest.add(pnLogo, BorderLayout.NORTH);
+
+        Box boxMenu = Box.createVerticalBox();
+        boxMenu.setBorder(new EmptyBorder(8, 12, 12, 12));
+        pnWest.add(boxMenu, BorderLayout.CENTER);
+
+        Font fontButton = new Font("Roboto", Font.BOLD, 16);
+        Color bgMenu = colorSidebar;
+        Color hoverColor = new Color(40, 40, 40);
+        Color selectedColor = colorAccent;
 
         btnTrangChu = new JButton("Trang chủ");
         btnBanVe = new JButton("Bán vé");
@@ -73,16 +102,19 @@ public class Start extends JFrame implements ActionListener {
 
         for (JButton btn : menuButtons) {
             btn.setBackground(bgMenu);
-            btn.setForeground(Color.WHITE);
+            btn.setForeground(colorText);
             btn.setFont(fontButton);
-            btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
+            btn.setAlignmentX(Component.LEFT_ALIGNMENT);
+            btn.setMaximumSize(new Dimension(Integer.MAX_VALUE, 46));
             btn.setBorderPainted(false);
             btn.setFocusPainted(false);
-            btn.setIconTextGap(5);
+            btn.setHorizontalAlignment(SwingConstants.LEFT);
+            btn.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
             btn.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mouseEntered(java.awt.event.MouseEvent evt) {
-                    btn.setBackground(hoverColor);
+                    if (btn != selectedButton) {
+                        btn.setBackground(hoverColor);
+                    }
                 }
 
                 public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -94,26 +126,28 @@ public class Start extends JFrame implements ActionListener {
                 }
             });
         }
-        btnDangXuat.setBackground(Color.WHITE);
+        btnDangXuat.setBackground(colorAccent);
         btnDangXuat.setForeground(Color.BLACK);
         btnDangXuat.setFont(fontButton);
-        btnDangXuat.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnDangXuat.setAlignmentX(Component.LEFT_ALIGNMENT);
         btnDangXuat.setBorderPainted(false);
         btnDangXuat.setFocusPainted(false);
+        btnDangXuat.setBorder(BorderFactory.createEmptyBorder(8, 12, 8, 12));
 
-        boxMenu.add(Box.createVerticalStrut(10));
+        boxMenu.add(Box.createVerticalStrut(6));
         for (JButton btn : menuButtons) {
             boxMenu.add(btn);
-            boxMenu.add(Box.createVerticalStrut(10));
+            boxMenu.add(Box.createVerticalStrut(6));
         }
 
-        boxMenu.add(createSeparatorLine(3));
         boxMenu.add(Box.createVerticalStrut(8));
         boxMenu.add(btnDangXuat);
 
+        add(pnTop, BorderLayout.NORTH);
         add(pnWest, BorderLayout.WEST);
 
         JPanel pnCenter = new JPanel(new CardLayout());
+        pnCenter.setBackground(colorBg);
         add(pnCenter, BorderLayout.CENTER);
 
         JPanel trangChuPanel = new TrangChu();
@@ -180,7 +214,7 @@ public class Start extends JFrame implements ActionListener {
         setupKeyboardShortcuts();
 
         selectButton(btnTrangChu, menuButtons, bgMenu, selectedColor);
-        ModernUI.applySoftStyle(this);
+        // Custom dashboard styling uses explicit colors.
         TooltipSupport.apply(this);
     }
 
@@ -279,7 +313,7 @@ public class Start extends JFrame implements ActionListener {
         for (JButton b : navButtons) {
             if (b == selected) {
                 b.setBackground(selectedColor);
-                b.setForeground(Color.WHITE); 
+                b.setForeground(Color.BLACK);
             } else {
                 b.setBackground(bgMenu);
                 b.setForeground(Color.WHITE);

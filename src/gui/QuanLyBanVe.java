@@ -42,13 +42,11 @@ public class QuanLyBanVe extends JPanel implements LoadData, ResetForm {
 
     public QuanLyBanVe() {
         setLayout(new BorderLayout(10, 10));
+        setBackground(ModernUI.getBackgroundColor());
         // Load database
         loadData();
-        // ===== NORTH: Tiêu đề =====
-        JLabel lblTitle = new JLabel("QUẢN LÝ BÁN VÉ", JLabel.CENTER);
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
-        lblTitle.setForeground(Color.RED);
-        add(lblTitle, BorderLayout.NORTH);
+        // ===== NORTH: Header =====
+        add(ModernUI.createHeader("QUẢN LÝ BÁN VÉ"), BorderLayout.NORTH);
 
         JPanel pCenter = new JPanel();
         pCenter.setLayout(new BoxLayout(pCenter, BoxLayout.Y_AXIS));
@@ -227,7 +225,9 @@ public class QuanLyBanVe extends JPanel implements LoadData, ResetForm {
             JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         centerScroll.getVerticalScrollBar().setUnitIncrement(16);
         centerScroll.setBorder(BorderFactory.createEmptyBorder());
-        add(centerScroll, BorderLayout.CENTER);
+        JPanel contentCard = ModernUI.createContentCard(new BorderLayout());
+        contentCard.add(centerScroll, BorderLayout.CENTER);
+        add(contentCard, BorderLayout.CENTER);
 
         btnXoaChon.addActionListener(e -> resetForm());
         btnDatVe.addActionListener(e -> acceptTicket());

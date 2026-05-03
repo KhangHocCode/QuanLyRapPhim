@@ -38,7 +38,9 @@ public class QuanLyHoaDon extends JPanel implements LoadData {
 
     public QuanLyHoaDon() {
         setLayout(new BorderLayout(10, 10));
-        setBackground(Color.WHITE);
+        setBackground(ModernUI.getBackgroundColor());
+
+        add(ModernUI.createHeader("QUẢN LÝ HÓA ĐƠN"), BorderLayout.NORTH);
 
         // ======= KẾT NỐI DATABASE =======
         try {
@@ -59,7 +61,7 @@ public class QuanLyHoaDon extends JPanel implements LoadData {
                 TitledBorder.LEFT, TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 20),
                 Color.DARK_GRAY));
-        pnNorth.setBackground(Color.WHITE);
+        pnNorth.setBackground(ModernUI.getSurfaceColor());
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(8, 10, 8, 10);
@@ -114,7 +116,8 @@ public class QuanLyHoaDon extends JPanel implements LoadData {
         pnNorth.add(txtTongTien, gbc);
 
         setFormEditable(false);
-        add(pnNorth, BorderLayout.NORTH);
+        JPanel contentCard = ModernUI.createContentCard(new BorderLayout(10, 10));
+        contentCard.add(pnNorth, BorderLayout.NORTH);
 
         model = new DefaultTableModel(new String[] {
                 "Mã hóa đơn", "Ngày lập", "Mã NV", "Mã KH", "Số lượng vé", "Tổng tiền"
@@ -132,10 +135,10 @@ public class QuanLyHoaDon extends JPanel implements LoadData {
                 TitledBorder.LEFT, TitledBorder.TOP,
                 new Font("Segoe UI", Font.BOLD, 18),
                 Color.DARK_GRAY));
-        add(scroll, BorderLayout.CENTER);
+        contentCard.add(scroll, BorderLayout.CENTER);
 
         JPanel pnSouth = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
-        pnSouth.setBackground(Color.WHITE);
+        pnSouth.setBackground(ModernUI.getSurfaceColor());
 
         JLabel lblTim = new JLabel("Xem hóa đơn:");
         lblTim.setFont(new Font("Segoe UI", Font.BOLD, 18));
@@ -171,7 +174,8 @@ public class QuanLyHoaDon extends JPanel implements LoadData {
         pnSouth.add(btnXoaRong);
         pnSouth.add(btnLuu);
 
-        add(pnSouth, BorderLayout.SOUTH);
+        contentCard.add(pnSouth, BorderLayout.SOUTH);
+        add(contentCard, BorderLayout.CENTER);
 
         // ===== SỰ KIỆN =====
         loadData();

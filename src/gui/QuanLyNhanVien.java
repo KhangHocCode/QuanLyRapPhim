@@ -32,27 +32,20 @@ public class QuanLyNhanVien extends JPanel implements LoadData {
         daoNV = new QuanLyNhanVien_DAO();
         
         // ====== SETUP PANEL CHÍNH ======
-        setBackground(new Color(245, 245, 245));
+        setBackground(ModernUI.getBackgroundColor());
         setLayout(new BorderLayout(0, 0));
         
         // ====== PANEL CONTENT CHÍNH - CĂN GIỮA ======
+        add(ModernUI.createHeader("QUẢN LÝ NHÂN VIÊN"), BorderLayout.NORTH);
+
         JPanel pnlContent = new JPanel(new BorderLayout());
-        pnlContent.setBackground(new Color(245, 245, 245));
+        pnlContent.setBackground(ModernUI.getSurfaceColor());
         pnlContent.setBorder(new EmptyBorder(20, 50, 20, 50)); // Margin xung quanh
         add(pnlContent, BorderLayout.CENTER);
 
-        // ====== TIÊU ĐỀ ======
-        JPanel pnlTitle = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        pnlTitle.setBackground(new Color(245, 245, 245));
-        JLabel lblTitle = new JLabel("QUẢN LÝ NHÂN VIÊN");
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 32));
-        lblTitle.setForeground(new Color(220, 0, 0));
-        pnlTitle.add(lblTitle);
-        pnlContent.add(pnlTitle, BorderLayout.NORTH);
-
         // ====== PANEL CHỨA FORM VÀ BẢNG ======
         JPanel pnlMainContent = new JPanel(new BorderLayout(15, 15));
-        pnlMainContent.setBackground(new Color(245, 245, 245));
+        pnlMainContent.setBackground(ModernUI.getSurfaceColor());
         pnlContent.add(pnlMainContent, BorderLayout.CENTER);
 
         // ====== FORM NHẬP LIỆU ======
@@ -211,12 +204,12 @@ public class QuanLyNhanVien extends JPanel implements LoadData {
 
     private JPanel createButtonPanel() {
         JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 15));
-        pnlButtons.setBackground(new Color(245, 245, 245));
+        pnlButtons.setBackground(ModernUI.getSurfaceColor());
         pnlButtons.setBorder(new EmptyBorder(20, 0, 10, 0));
 
         // Tìm kiếm
         JPanel pnlSearch = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
-        pnlSearch.setBackground(new Color(245, 245, 245));
+        pnlSearch.setBackground(ModernUI.getSurfaceColor());
         JLabel lblTim = new JLabel("Tìm theo tên:");
         lblTim.setFont(new Font("Segoe UI", Font.BOLD, 14));
         pnlSearch.add(lblTim);
@@ -231,7 +224,7 @@ public class QuanLyNhanVien extends JPanel implements LoadData {
 
         // Các nút chức năng
         JPanel pnlFunctionButtons = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
-        pnlFunctionButtons.setBackground(new Color(245, 245, 245));
+        pnlFunctionButtons.setBackground(ModernUI.getSurfaceColor());
         
         btnThem = createStyledButton("➕ Thêm mới", new Color(40, 167, 69));
         btnSua = createStyledButton("✏️ Cập nhật", new Color(255, 193, 7));
