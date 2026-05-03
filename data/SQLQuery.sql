@@ -226,14 +226,16 @@ INSERT INTO NhanVien (maNV, tenNV, diaChi, soDienThoai, ngaySinh, email, gioiTin
 VALUES
 ('NV01', N'Nguyễn Hữu Khang', N'123 Lê Lợi, Quận 1, TP.HCM', '0905123456', '1998-03-15', 'khang.nguyen@example.com', N'Nam'),
 ('NV02', N'Văn Sĩ Sang', N'45 Hai Bà Trưng, Hà Nội', '0987654321', '2000-07-22', 'sang.van@example.com', N'Nam'),
-('NV03', N'Nguyễn Hữu Khang', N'78 Nguyễn Huệ, Đà Nẵng', '0912345678', '1995-11-09', 'khang.nguyen2@example.com', N'Nam');
+('NV03', N'Nguyễn Hữu Khang', N'78 Nguyễn Huệ, Đà Nẵng', '0912345678', '1995-11-09', 'khang.nguyen2@example.com', N'Nam'),
+('NV04', N'Nguyễn Gia Huy', N'12 Nguyễn Văn Bảo, Gò Vấp, TP.HCM', '0909123456', '2001-05-12', 'huy.nguyen@example.com', N'Nam');
 GO
 
 INSERT INTO TaiKhoan (maNV, taiKhoan, matKhau)
 VALUES
 ('NV01', N'nguyenhuukhang', N'123456'),
 ('NV02', N'vansisang', N'123456'),
-('NV03', N'nguyenhuukhang2', N'123456');
+('NV03', N'nguyenhuukhang2', N'123456'),
+('NV04', N'nguyengiahuy', N'123456');
 GO
 
 INSERT INTO KhachHang (maKH, hoTen, gioiTinh, soDT, diaChi)
