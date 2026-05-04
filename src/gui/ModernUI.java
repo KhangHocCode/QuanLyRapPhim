@@ -79,6 +79,11 @@ public final class ModernUI {
         UIManager.put("Viewport.background", COLOR_BG);
         UIManager.put("TitledBorder.titleColor", COLOR_TEXT);
         UIManager.put("TitledBorder.font", new Font("Roboto", Font.BOLD, 16));
+        UIManager.put("OptionPane.background", COLOR_BG);
+        UIManager.put("OptionPane.messageAreaBackground", COLOR_SURFACE);
+        UIManager.put("OptionPane.messageForeground", COLOR_TEXT);
+        UIManager.put("OptionPane.foreground", COLOR_TEXT);
+        UIManager.put("OptionPane.buttonFont", FONT_BUTTON);
     }
 
     public static void applySoftStyle(Component root) {

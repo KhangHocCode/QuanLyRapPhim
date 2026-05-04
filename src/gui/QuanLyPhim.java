@@ -446,6 +446,11 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
         }
 
         String ma = txtMaPhim.getText().trim();
+
+        if (phimDAO.timPhimTheoMa(ma) == null) {
+            JOptionPane.showMessageDialog(this, "❌ Không tìm thấy phim cần xóa!");
+            return;
+        }
         
         int confirm = JOptionPane.showConfirmDialog(this, "Xóa phim " + ma + "?", "Xác nhận",
                 JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
@@ -457,7 +462,8 @@ public class QuanLyPhim extends JPanel implements LoadData, ActionListener {
                     loadDataToTable();
                     xoaRong();
                 } else {
-                    JOptionPane.showMessageDialog(this, "❌ Không tìm thấy phim cần xóa!");
+                    JOptionPane.showMessageDialog(this,
+                            "❌ Không thể xóa phim này!\nPhim đã có suất chiếu hoặc vé được bán.");
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, 

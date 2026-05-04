@@ -72,23 +72,35 @@ public class HoaDonModal extends JFrame {
             return;
         }
 
+        String maHoaDon = safeText(hoaDon.getMaHoaDon());
+        String ngayLap = hoaDon.getNgayLap() != null ? hoaDon.getNgayLap().toString() : "";
+        String soLuongVe = Integer.toString(hoaDon.getSoLuongVe());
+        String tongTien = Double.toString(hoaDon.getTongTien());
+
+        String tenNV = hoaDon.getNhanVien() != null ? safeText(hoaDon.getNhanVien().getTenNV()) : "";
+        String sdtNV = hoaDon.getNhanVien() != null ? safeText(hoaDon.getNhanVien().getSoDienThoai()) : "";
+
+        String tenKH = hoaDon.getKhachHang() != null ? safeText(hoaDon.getKhachHang().getHoTen()) : "";
+        String diaChiKH = hoaDon.getKhachHang() != null ? safeText(hoaDon.getKhachHang().getDiaChi()) : "";
+        String sdtKH = hoaDon.getKhachHang() != null ? safeText(hoaDon.getKhachHang().getSoDT()) : "";
+
         JPanel pHoaDon = new JPanel();
         pHoaDon.setLayout(new BoxLayout(pHoaDon, BoxLayout.Y_AXIS));
 
-        JLabel lblMaHD = new JLabel("   Mã hóa đơn:             " + hoaDon.getMaHoaDon());
-        JLabel lblNgayLap = new JLabel("   Ngày lập hóa đơn:   " + hoaDon.getNgayLap().toString());
-        JLabel lblSoLuongVe = new JLabel("   Số lượng vé:             " + hoaDon.getSoLuongVe());
-        JLabel lblTongTien = new JLabel("   Tổng tiền:                  " + hoaDon.getTongTien());
+        JLabel lblMaHD = new JLabel("   Mã hóa đơn:             " + maHoaDon);
+        JLabel lblNgayLap = new JLabel("   Ngày lập hóa đơn:   " + ngayLap);
+        JLabel lblSoLuongVe = new JLabel("   Số lượng vé:             " + soLuongVe);
+        JLabel lblTongTien = new JLabel("   Tổng tiền:                  " + tongTien);
 
-        JLabel lblNhanVien = new JLabel("   Nhân viên bán vé:  " + hoaDon.getNhanVien().getTenNV());
-        JLabel lblSoDienThoai = new JLabel("   Số liên hệ:               " + hoaDon.getNhanVien().getSoDienThoai());
+        JLabel lblNhanVien = new JLabel("   Nhân viên bán vé:  " + tenNV);
+        JLabel lblSoDienThoai = new JLabel("   Số liên hệ:               " + sdtNV);
         JLabel lblDiaChiRap = new JLabel("   Địa chỉ rạp chiếu:  " +
                 "12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP. Hồ Chí Minh");
         JLabel lblEmail = new JLabel("   Email:                       " + "HSKCinema@gmail.com");
 
-        JLabel lblTenKhachHang = new JLabel("   Khách hàng:        " + hoaDon.getKhachHang().getHoTen());
-        JLabel lblDiaChiKH = new JLabel("   Địa chỉ:                 " + hoaDon.getKhachHang().getDiaChi());
-        JLabel lblSoDienThoaiKH = new JLabel("   Số điện thoại:      " + hoaDon.getKhachHang().getSoDT());
+        JLabel lblTenKhachHang = new JLabel("   Khách hàng:        " + tenKH);
+        JLabel lblDiaChiKH = new JLabel("   Địa chỉ:                 " + diaChiKH);
+        JLabel lblSoDienThoaiKH = new JLabel("   Số điện thoại:      " + sdtKH);
 
         JPanel pThongTinNhanVien = new JPanel();
         pThongTinNhanVien.setLayout(new BoxLayout(pThongTinNhanVien, BoxLayout.Y_AXIS));
@@ -135,20 +147,34 @@ public class HoaDonModal extends JFrame {
         add(pNorth, BorderLayout.NORTH);
 
         ArrayList<ChiTietHoaDon> cthdList = cthdManager.timCTHDTheoMaHoaDon(hoaDon.getMaHoaDon());
+        if (cthdList == null) {
+            cthdList = new ArrayList<>();
+        }
         Object[] columns = { "STT", "Mã vé", "Tên phim", "Số lượng", "Giá vé", "Thành tiền" };
         DefaultTableModel model = new DefaultTableModel(null, columns);
         int stt = 1;
         for (ChiTietHoaDon cthd : cthdList) {
+            if (cthd == null) {
+                continue;
+            }
             Ve ve = cthd.getVe();
+            if (ve == null) {
+                continue;
+            }
             // Tìm phim dựa vào suất chiếu
             SuatChieu suatChieu = suatChieuManager.timSuatChieu(ve.getMaSuatChieu());
+            String tenPhim = "";
             if (suatChieu != null) {
                 Phim phim = movieManager.timPhimTheoMa(suatChieu.getMaPhim());
-
-                Object[] data = { stt, ve.getMaVe(), phim.getTenPhim(), cthd.getSoLuong(), cthd.getGiaVe(),
-                        cthd.tinhThanhTien() };
-                model.addRow(data);
+                if (phim != null) {
+                    tenPhim = phim.getTenPhim();
+                }
             }
+
+            Object[] data = { stt, ve.getMaVe(), tenPhim, cthd.getSoLuong(), cthd.getGiaVe(),
+                    cthd.tinhThanhTien() };
+            model.addRow(data);
+            stt++;
         }
         JTable table = new JTable(model);
         JScrollPane scrollTable = new JScrollPane(table);
@@ -244,22 +270,28 @@ public class HoaDonModal extends JFrame {
             doc.add(title);
             doc.add(new Paragraph(" ", fontNormal));
 
-            doc.add(new Paragraph("Mã hóa đơn: " + this.hoaDon.getMaHoaDon(), fontNormal));
-            doc.add(new Paragraph("Ngày lập hóa đơn: " + this.hoaDon.getNgayLap().toString(), fontNormal));
-            doc.add(new Paragraph("Số lượng vé: " + this.hoaDon.getSoLuongVe(), fontNormal));
-            doc.add(new Paragraph("Tổng tiền: " + nf.format(this.hoaDon.getTongTien()), fontNormal));
+                doc.add(new Paragraph("Mã hóa đơn: " + safeText(this.hoaDon.getMaHoaDon()), fontNormal));
+                doc.add(new Paragraph("Ngày lập hóa đơn: "
+                    + (this.hoaDon.getNgayLap() != null ? this.hoaDon.getNgayLap().toString() : ""), fontNormal));
+                doc.add(new Paragraph("Số lượng vé: " + this.hoaDon.getSoLuongVe(), fontNormal));
+                doc.add(new Paragraph("Tổng tiền: " + nf.format(this.hoaDon.getTongTien()), fontNormal));
             doc.add(new Paragraph(" ", fontNormal));
 
-            doc.add(new Paragraph("Nhân viên bán vé: " + this.hoaDon.getNhanVien().getTenNV(), fontNormal));
-            doc.add(new Paragraph("Số liên hệ: " + this.hoaDon.getNhanVien().getSoDienThoai(), fontNormal));
+                String tenNhanVien = this.hoaDon.getNhanVien() != null ? this.hoaDon.getNhanVien().getTenNV() : "";
+                String sdtNhanVien = this.hoaDon.getNhanVien() != null ? this.hoaDon.getNhanVien().getSoDienThoai() : "";
+                doc.add(new Paragraph("Nhân viên bán vé: " + safeText(tenNhanVien), fontNormal));
+                doc.add(new Paragraph("Số liên hệ: " + safeText(sdtNhanVien), fontNormal));
             doc.add(new Paragraph("Địa chỉ rạp chiếu: 12 Nguyễn Văn Bảo, Phường 4, Quận Gò Vấp, TP. Hồ Chí Minh",
                     fontNormal));
             doc.add(new Paragraph("Email: HSKCinema@gmail.com", fontNormal));
             doc.add(new Paragraph(" ", fontNormal));
 
-            doc.add(new Paragraph("Khách hàng: " + this.hoaDon.getKhachHang().getHoTen(), fontNormal));
-            doc.add(new Paragraph("Địa chỉ: " + this.hoaDon.getKhachHang().getDiaChi(), fontNormal));
-            doc.add(new Paragraph("Số điện thoại: " + this.hoaDon.getKhachHang().getSoDT(), fontNormal));
+                String tenKhachHang = this.hoaDon.getKhachHang() != null ? this.hoaDon.getKhachHang().getHoTen() : "";
+                String diaChiKhachHang = this.hoaDon.getKhachHang() != null ? this.hoaDon.getKhachHang().getDiaChi() : "";
+                String sdtKhachHang = this.hoaDon.getKhachHang() != null ? this.hoaDon.getKhachHang().getSoDT() : "";
+                doc.add(new Paragraph("Khách hàng: " + safeText(tenKhachHang), fontNormal));
+                doc.add(new Paragraph("Địa chỉ: " + safeText(diaChiKhachHang), fontNormal));
+                doc.add(new Paragraph("Số điện thoại: " + safeText(sdtKhachHang), fontNormal));
             doc.add(new Paragraph(" ", fontNormal));
 
             // table of details
@@ -312,6 +344,10 @@ public class HoaDonModal extends JFrame {
     private void close() {
         this.dispose();
         return;
+    }
+
+    private static String safeText(String value) {
+        return value == null ? "" : value;
     }
 
 }
