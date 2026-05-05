@@ -9,6 +9,7 @@ import java.sql.*;
 import java.time.LocalDate;
 
 import entity.Ve;
+import entity.Ghe;
 
 public class QuanLyVe_DAO {
     private Connection conn;
@@ -20,6 +21,10 @@ public class QuanLyVe_DAO {
     public boolean add(Ve ve) {
         if (ve == null || this.conn == null)
             return false;
+        if (ve.getGhe() == null) {
+            System.out.println("ERROR: Vé không có ghế!");
+            return false;
+        }
         PreparedStatement stmt = null;
         int n = 0;
         try {
@@ -32,6 +37,7 @@ public class QuanLyVe_DAO {
             stmt.setString(4, ve.getMaSuatChieu());
             stmt.setBoolean(5, ve.isDaThanhToan());
             n = stmt.executeUpdate();
+            System.out.println("DEBUG: Lưu vé " + ve.getMaVe() + " với ghế " + ve.getGhe().getMaGhe());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -57,7 +63,14 @@ public class QuanLyVe_DAO {
                 String maSuatChieu = rs.getString("maSuatChieu");
                 boolean daThanhToan = rs.getBoolean("daThanhToan");
                 QuanLyGhe_DAO gheManager = new QuanLyGhe_DAO();
-                ve = new Ve(maVe, gheManager.TimGheTheoMa(maGhe), ngayBan, maSuatChieu, daThanhToan);
+                Ghe ghe = gheManager.TimGheTheoMa(maGhe);
+                if (ghe == null) {
+                    System.out.println("WARNING: Không tìm được ghế " + maGhe + " cho vé " + maVe);
+                }
+                ve = new Ve(maVe, ghe, ngayBan, maSuatChieu, daThanhToan);
+                System.out.println("DEBUG: Tìm được vé " + maVe + ", ghế: " + (ghe != null ? ghe.getMaGhe() : "null"));
+            } else {
+                System.out.println("DEBUG: Vé " + maVe + " không tìm được trong database");
             }
         } catch (Exception e) {
             e.printStackTrace();

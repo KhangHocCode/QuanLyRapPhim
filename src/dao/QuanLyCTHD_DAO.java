@@ -26,8 +26,8 @@ public class QuanLyCTHD_DAO {
             stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, cthd.getHoaDon().getMaHoaDon());
             stmt.setString(2, cthd.getVe().getMaVe());
-            stmt.setString(3, Integer.toString(cthd.getSoLuong()));
-            stmt.setString(4, Double.toString(cthd.getGiaVe()));
+            stmt.setInt(3, cthd.getSoLuong());
+            stmt.setDouble(4, cthd.getGiaVe());
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,21 +48,29 @@ public class QuanLyCTHD_DAO {
             stmt = this.conn.prepareStatement(sql);
             stmt.setString(1, maHoaDon);
             rs = stmt.executeQuery();
+            System.out.println("DEBUG [DAO]: Tìm CTHD cho hóa đơn " + maHoaDon);
             while (rs.next()) {
                 String maVe = rs.getString("maVe");
                 int soLuongVe = rs.getInt("soLuong");
                 double giaVe = rs.getDouble("giaVe");
+                System.out.println("DEBUG [DAO]: Tìm được CTHD - maVe: " + maVe + ", soLuong: " + soLuongVe + ", giaVe: " + giaVe);
 
                 QuanLyHoaDon_DAO hoaDonManager = new QuanLyHoaDon_DAO();
                 QuanLyVe_DAO veManager = new QuanLyVe_DAO();
 
+                Ve ve = veManager.findVeByID(maVe);
+                if (ve == null) {
+                    System.out.println("DEBUG [DAO]: Ve null cho maVe " + maVe);
+                }
+                
                 ChiTietHoaDon cthd = new ChiTietHoaDon(
                         hoaDonManager.findHoaDonByID(maHoaDon),
-                        veManager.findVeByID(maVe),
+                        ve,
                         soLuongVe,
                         giaVe);
                 dsCTHD.add(cthd);
             }
+            System.out.println("DEBUG [DAO]: Tổng CTHD tìm được: " + dsCTHD.size());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

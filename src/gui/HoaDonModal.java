@@ -150,15 +150,20 @@ public class HoaDonModal extends JFrame {
         if (cthdList == null) {
             cthdList = new ArrayList<>();
         }
+        System.out.println("DEBUG: Chi tiết hóa đơn - số lượng: " + cthdList.size());
+        
         Object[] columns = { "STT", "Mã vé", "Tên phim", "Số lượng", "Giá vé", "Thành tiền" };
         DefaultTableModel model = new DefaultTableModel(null, columns);
         int stt = 1;
+        int danhSachVeHopLe = 0;
         for (ChiTietHoaDon cthd : cthdList) {
             if (cthd == null) {
+                System.out.println("DEBUG: Chi tiết hóa đơn null");
                 continue;
             }
             Ve ve = cthd.getVe();
             if (ve == null) {
+                System.out.println("DEBUG: Vé null cho chi tiết hóa đơn");
                 continue;
             }
             // Tìm phim dựa vào suất chiếu
@@ -174,7 +179,16 @@ public class HoaDonModal extends JFrame {
             Object[] data = { stt, ve.getMaVe(), tenPhim, cthd.getSoLuong(), cthd.getGiaVe(),
                     cthd.tinhThanhTien() };
             model.addRow(data);
+            System.out.println("DEBUG: Thêm dòng " + stt + " - Mã vé: " + ve.getMaVe());
             stt++;
+            danhSachVeHopLe++;
+        }
+        if (danhSachVeHopLe == 0 && cthdList.size() > 0) {
+            System.out.println("WARNING: Hóa đơn có " + cthdList.size() + " chi tiết nhưng tất cả vé đều null!");
+            JOptionPane.showMessageDialog(this, "Cảnh báo: Không thể hiển thị chi tiết hóa đơn!\n" +
+                    "Dữ liệu vé hoặc ghế không tìm được trong hệ thống.\n" +
+                    "Vui lòng kiểm tra lại dữ liệu.", "Cảnh báo",
+                    JOptionPane.WARNING_MESSAGE);
         }
         JTable table = new JTable(model);
         JScrollPane scrollTable = new JScrollPane(table);

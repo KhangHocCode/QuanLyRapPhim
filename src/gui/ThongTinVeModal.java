@@ -286,11 +286,13 @@ public class ThongTinVeModal extends JFrame {
 
             String tenGhe = this.soGheDuocChon.get(i);
             Ghe ghe = this.chairManager.TimGheTheoTen(tenGhe, this.suatChieu.getMaRap());
+            System.out.println("DEBUG: Tạo vé cho ghế " + tenGhe + ", Ghe obj: " + (ghe != null ? ghe.getMaGhe() : "null"));
 
             Ve ve = xuLyTaoVeTheoGhe(ghe);
             if (ve != null) {
                 danhSachVeDaDat.add(ve);
                 this.ticketManager.add(ve);
+                System.out.println("DEBUG: Lưu vé: " + ve.getMaVe());
                 ghe.setTinhTrang(true);
                 this.chairManager.capNhatTinhTrangGhe(ghe);
             }
@@ -298,6 +300,7 @@ public class ThongTinVeModal extends JFrame {
 
         // Thêm hóa đơn
         this.billManager.add(this.hoaDon);
+        System.out.println("DEBUG: Lưu hóa đơn: " + this.hoaDon.getMaHoaDon() + ", tổng vé: " + danhSachVeDaDat.size());
         xuLyTaoChiTietHoaDon(this.hoaDon, danhSachVeDaDat, this.suatChieu.getGiaVe());
 
         JOptionPane.showMessageDialog(this, "Thanh toán thành công !",
@@ -345,6 +348,7 @@ public class ThongTinVeModal extends JFrame {
         for (Ve ve : danhSachVeDaDat) {
             ChiTietHoaDon cthd = new ChiTietHoaDon(hoaDon, ve, 1, giaVe);
             this.cthdManager.add(cthd);
+            System.out.println("DEBUG: Lưu chi tiết hóa đơn cho vé " + ve.getMaVe() + ", giá: " + giaVe);
         }
     }
 }
